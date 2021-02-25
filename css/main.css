@@ -21,8 +21,18 @@ input {
 }
 
 button {
+    color: crimson;
+    background-color: white;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width: 10rem;
+    width: 8rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 1px solid crimson;
+}
+
+button:hover {
+    color: white;
+    background-color: crimson;
 }
 

@@ -2,7 +2,8 @@
 
 const URL_API = 'https://api.airtable.com/v0/appPrEuIwDOgengPk/Table%201?maxRecords=3&view=Grid%20view';
 const URL_API_ADD = 'https://api.airtable.com/v0/appPrEuIwDOgengPk/Table%201';
-const URL_API_DELETE = 'https://api.airtable.com/v0/appPrEuIwDOgengPk/Table%201 ';
+const URL_API_DELETE = 'https://api.airtable.com/v0/appPrEuIwDOgengPk/Table%201?records[]=';
+const URL_API_UPDATE = 'https://api.airtable.com/v0/appPrEuIwDOgengPk/Table%201';
 const AUTHORIZATION = 'Bearer keyOzTSqIJ6LUp99l';
 
 new Vue({
@@ -11,7 +12,7 @@ new Vue({
         textos: [],
         nuevoTitulo: '',
         nuevoTexto: '',
-        nuevaImagen: []
+        nuevaImagen: ''
     },
     mounted: function () {
         this.obtenerEntradas();
@@ -42,6 +43,11 @@ new Vue({
                         {
                             "fields": {
                                 "Titulo": this.nuevoTitulo,
+                                "Foto": [
+                                    {
+                                        "url": "https://dl.airtable.com/.attachments".concat(this.nuevaImagen)
+                                    }
+                                ],
                                 "Texto": this.nuevoTexto
                             }
                         }
@@ -50,6 +56,7 @@ new Vue({
             })
                 .then(() => this.nuevoTitulo = '')
                 .then(() => this.nuevoTexto = '')
+                .then(() => this.nuevaImagen = '')
                 .then(() => this.obtenerEntradas())
         },
         borrarEntradas: function (id) {
@@ -63,5 +70,26 @@ new Vue({
             // Borramos del LOCAL
             this.textos = this.textos.filter(texto => texto.id !== id)
         },
+        actualizarEntradas: function (id, nuevoTexto) {
+            //actualizar producto
+            fetch(URL_API_UPDATE, {
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization' : AUTHORIZATION
+                },
+                method: 'PATCH',
+                body: JSON.stringify({
+                    "records": [
+                        {
+                            "id": id,
+                            "fields": {
+                                "Nombre": nuevoTexto,
+                            }
+                        }
+                    ]
+                })
+            })
+                .then(() => this.obtenerEntradas())
+        }
     }
 })

@@ -42,8 +42,9 @@
             <div class="blog__anyadir">
                 <h2 class="blog__titulo">Nuevas Entradas</h2>
                 <input v-model="nuevoTitulo" placeholder="Titulo"  type="text">
+                <input v-model="nuevaImagen" placeholder="Añadir Imagen"  type="file">
                 <textarea v-model="nuevoTexto"  cols="30" rows="10" placeholder="Texto"></textarea>
-                <button @click="anyadirEntradas">Añadir Entrada</button>
+                <button @click="anyadirEntradas" type="submit">Añadir</button>
 
             </div>
         </div>
