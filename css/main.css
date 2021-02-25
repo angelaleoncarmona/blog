@@ -1,0 +1,28 @@
+.blog {
+    text-align: left;
+    margin: 5rem 4rem;
+    font-family: 'Roboto';
+}
+
+.blog__titulo {
+    color: crimson;
+    padding-bottom: 1rem;
+    border-bottom: .75rem solid crimson;
+}
+
+.blog__anyadir {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 10rem;
+}
+

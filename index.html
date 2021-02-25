@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>BLOG AIRTABLE</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="theme-color" content="#3c790a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="author" content="Tu nombre">
+    <meta name="generator" content="Clojure">
+    <meta name="keywords" content="html, css, javascript">
+    <meta name="description" content="my description...">
+    <meta property="og:image" content="img/screenshot.png">
+    <meta property="og:title" content="The Rock">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@cuenta">
+    <meta name="twitter:creator" content="@cuenta">
+    <meta property="og:image:secure_url" content="https://...">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="300">
+    <meta property="og:image:alt" content="">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- JS -->
+    <script src="js/vendors/vue.min.js"></script>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+<main id="app">
+    <section class="blog">
+        <div class="blog__entradas">
+            <h1 class="blog__titulo">Mi Blog</h1>
+            <div v-for="texto in textos" class="blog__entradas">
+                <h2 class="blog__entradas-titulo">{{ texto.fields.Titulo }}</h2>
+                <p>{{ texto.fields.Texto }}</p>
+                <button @click="borrarEntradas(texto.id)">Eliminar</button>
+            </div>
+            <div class="blog__anyadir">
+                <h2 class="blog__titulo">Nuevas Entradas</h2>
+                <input v-model="nuevoTitulo" placeholder="Titulo"  type="text">
+                <textarea v-model="nuevoTexto"  cols="30" rows="10" placeholder="Texto"></textarea>
+                <button @click="anyadirEntradas">Añadir Entrada</button>
+
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
