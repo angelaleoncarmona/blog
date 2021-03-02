@@ -34,19 +34,31 @@
     <section class="blog">
         <div class="blog__entradas">
             <h1 class="blog__titulo">Mi Blog</h1>
+            <!-- Recorremos y mostramos -->
             <div v-for="texto in textos" class="blog__entradas">
-                <h2 class="blog__entradas-titulo">{{ texto.fields.Titulo }}</h2>
-                <p>{{ texto.fields.Texto }}</p>
-                <button @click="borrarEntradas(texto.id)">Eliminar</button>
+                <div v-if="texto.id !== productoEditar">
+                    <!-- Titulo -->
+                    <h1 @click="abrirTitulo(texto.id, texto.fields.Titulo)" class="blog__entradas-titulo"> {{ texto.fields.Titulo }}</h1>
+                    <!-- Texto -->
+                    <p @click="abrirTexto(texto.id, texto.fields.Texto)"> {{ texto.fields.Texto }}</p>
+                    <!-- Botón Eliminar -->
+                    <button @click="borrarEntradas(texto.id)">Eliminar</button>
+                </div>
+                <!-- Else para editar inputs -->
+                <div v-else>
+                    <input @keypress.enter="actualizarEntradas(texto.id, actTitulo)" v-model="actTitulo" type="text" placeholder="Escribe aquí el título">
+                    <input @keypress.enter="actualizarEntradas(texto.id, actTexto)" v-model="actTexto" type="text" placeholder="Escribe aquí el texto" >
+                </div>
             </div>
+            <!-- Inputs para añadir nuevas entradas -->
             <div class="blog__anyadir">
                 <h2 class="blog__titulo">Nuevas Entradas</h2>
                 <input v-model="nuevoTitulo" placeholder="Titulo"  type="text">
                 <input v-model="nuevaImagen" placeholder="Añadir Imagen"  type="file">
                 <textarea v-model="nuevoTexto"  cols="30" rows="10" placeholder="Texto"></textarea>
                 <button @click="anyadirEntradas" type="submit">Añadir</button>
-
             </div>
+
         </div>
     </section>
 </main>

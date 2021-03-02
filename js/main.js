@@ -12,6 +12,9 @@ new Vue({
         textos: [],
         nuevoTitulo: '',
         nuevoTexto: '',
+        actTitulo: '',
+        actTexto: '',
+        productoEditar: false,
         nuevaImagen: ''
     },
     mounted: function () {
@@ -69,8 +72,38 @@ new Vue({
             });
             // Borramos del LOCAL
             this.textos = this.textos.filter(texto => texto.id !== id)
+        },actualizarAdquiridoEnAPI: function(id, checked) {
+            fetch(URL_API_ACTUALIZAR, {
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization' : AUTHORIZATION
+                },
+                method: 'PATCH',
+                body: JSON.stringify({
+                    "records": [
+                        {
+                            "id": id,
+                            "fields": {
+                                "Comprado": checked,
+                            }
+                        }
+                    ]
+                })
+            })
+            // Actualizamos en Local
+            this.productos = this.productos.map((producto) => {
+                if (producto.id === id) {
+                    let miProducto = producto;
+                    miProducto.fields.Comprado = checked;
+                    return miProducto;
+                } else {
+                    return producto;
+                }
+            });
         },
-        actualizarEntradas: function (id, nuevoTexto) {
+        actualizarEntradas: function(id) {
+            // cerrar editor
+            this.productoEditar = false
             //actualizar producto
             fetch(URL_API_UPDATE, {
                 headers: {
@@ -83,13 +116,22 @@ new Vue({
                         {
                             "id": id,
                             "fields": {
-                                "Nombre": nuevoTexto,
+                                "Titulo": this.actTitulo,
+                                "Texto": this.actTexto
                             }
                         }
                     ]
                 })
             })
                 .then(() => this.obtenerEntradas())
+        },
+        abrirTitulo: function (id, titulo) {
+            this.productoEditar = id;
+            this.actTitulo = titulo;
+        },
+        abrirTexto: function (id, texto) {
+            this.productoEditar = id;
+            this.actTexto = texto;
         }
     }
 })
