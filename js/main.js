@@ -125,13 +125,10 @@ new Vue({
             })
                 .then(() => this.obtenerEntradas())
         },
-        abrirTitulo: function (id, titulo) {
+        abrirEditar: function (id, titulo, texto) {
             this.productoEditar = id;
             this.actTitulo = titulo;
-        },
-        abrirTexto: function (id, texto) {
-            this.productoEditar = id;
             this.actTexto = texto;
-        }
+        },
     }
 })

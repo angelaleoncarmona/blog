@@ -38,9 +38,9 @@
             <div v-for="texto in textos" class="blog__entradas">
                 <div v-if="texto.id !== productoEditar">
                     <!-- Titulo -->
-                    <h1 @click="abrirTitulo(texto.id, texto.fields.Titulo)" class="blog__entradas-titulo"> {{ texto.fields.Titulo }}</h1>
+                    <h1 @click="abrirEditar(texto.id, texto.fields.Titulo, texto.fields.Texto)" class="blog__entradas-titulo"> {{ texto.fields.Titulo }}</h1>
                     <!-- Texto -->
-                    <p @click="abrirTexto(texto.id, texto.fields.Texto)"> {{ texto.fields.Texto }}</p>
+                    <p @click="abrirEditar(texto.id, texto.fields.Titulo, texto.fields.Texto)"> {{ texto.fields.Texto }}</p>
                     <!-- Botón Eliminar -->
                     <button @click="borrarEntradas(texto.id)">Eliminar</button>
                 </div>
